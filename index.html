@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bærekraft Hjelperen</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body class="light-mode">
+    <header>
+        <div class="hero-section">
+            <div class="wave-container">
+                <div class="wave"></div>
+                <div class="wave"></div>
+            </div>
+            <div class="header-content">
+            <img src="Eco.png" alt="Logo" class="logo">
+            <div class="header-text">
+                <h1>RESIRKULERINGS HJELPER</h1>
+                <p>Her kan du få hjelp til å resirkulere riktig!</p>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="search-section">
+            <h2>Finn ut hvor du skal kaste avfallet ditt</h2>
+            <div class="search-container">
+                <input type="text" id="recycle-input" placeholder="Skriv inn et element..." />
+                <button onclick="checkRecycling()">Sjekk</button>
+            </div>
+            <p id="recycling-instructions"></p>
+            <img id="recycling-image" alt="Recycling bin" style="display:none;">
+        </section>
+
+        <section class="categories">
+            <div class="container">
+                <h2>Velg Avfallskategori</h2>
+                <p class="section-description">Klikk på en kategori for å se sorteringsregler</p>
+                <div class="category-grid">
+                    <div class="category-card" data-category="Plast">
+                        <i class="fas fa-bottle-water fa-2x"></i>
+                        <h3>Plast</h3>
+                        <p class="category-description">Alt av plastemballasje</p>
+                    </div>
+                    <div class="category-card" data-category="Glass/Metall">
+                        <i class="fas fa-wine-bottle fa-2x"></i>
+                        <h3>Glass og Metall</h3>
+                        <p class="category-description">Flasker, bokser og metallemballasje</p>
+                    </div>
+                    <div class="category-card" data-category="Papir">
+                        <i class="fas fa-newspaper fa-2x"></i>
+                        <h3>Papir og Papp</h3>
+                        <p class="category-description">Aviser, kartonger og emballasje</p>
+                    </div>
+                    <div class="category-card" data-category="Matavfall">
+                        <i class="fas fa-apple-whole fa-2x"></i>
+                        <h3>Matavfall</h3>
+                        <p class="category-description">Matrester og organisk avfall</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Category Info Modal -->
+        <div id="categoryModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <div class="modal-header">
+                    <i id="modalIcon" class="fas"></i>
+                    <h2 id="modalTitle"></h2>
+                </div>
+                <div class="modal-body">
+                    <p id="modalDescription"></p>
+                    <div class="examples-section">
+                        <h3>Dette kan du kaste her:</h3>
+                        <ul id="modalExamples"></ul>
+                    </div>
+                    <div class="instructions-section">
+                        <h3>Spesielle instruksjoner:</h3>
+                        <p id="modalInstructions"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Statistics Modal -->
+        <div id="statsModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="statsCloseButton">&times;</span>
+                <div class="modal-header">
+                    <i id="statsModalIcon" class="fas"></i>
+                    <h2 id="statsModalTitle"></h2>
+                </div>
+                <div class="modal-body">
+                    <p id="statsModalDescription"></p>
+                    <div class="stats-details">
+                        <div class="stat-detail-section">
+                            <h3>Historisk Utvikling</h3>
+                            <p id="statsModalTrends"></p>
+                        </div>
+                        <div class="stat-detail-section">
+                            <h3>EU Sammenligning</h3>
+                            <p id="statsModalComparison"></p>
+                        </div>
+                        <div class="stat-detail-section">
+                            <h3>Forbedringstiltak</h3>
+                            <ul id="statsModalActions"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <section class="norway-stats">
+            <div class="stats-header">
+                <h2>Resirkulering i Norge</h2>
+                <p class="stats-subtitle">Status for norsk avfallshåndtering</p>
+            </div>
+            <div class="stats-overview">
+                <div class="stats-text">
+                    <h3>Vi må bli bedre på resirkulering</h3>
+                    <p>Norge har fortsatt en lang vei å gå for å nå EU's mål om 65% resirkulering innen 2035.</p>
+                </div>
+                <div class="norway-stats-grid glass-effect">
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-top">
+                                <div class="stat-icon">
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                                <div class="stat-numbers">
+                                    <p class="stat-highlight">205 kg</p>
+                                    <span class="trend">↓ 5.3%</span>
+                                </div>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Avfall per Person</h3>
+                                <p class="stat-description">Årlig mengde per innbygger, over EU-gjennomsnittet</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-top">
+                                <div class="stat-icon">
+                                    <i class="fas fa-recycle"></i>
+                                </div>
+                                <div class="stat-numbers">
+                                    <p class="stat-highlight">41%</p>
+                                    <span class="trend negative">↓ 1.5%</span>
+                                </div>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Resirkuleringsrate</h3>
+                                <p class="stat-description">Av husholdningsavfall, under EU-målet på 65%</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-top">
+                                <div class="stat-icon">
+                                    <i class="fas fa-water"></i>
+                                </div>
+                                <div class="stat-numbers">
+                                    <p class="stat-highlight">8000 tonn</p>
+                                    <span class="trend negative">↑ 5%</span>
+                                </div>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Plast i Havet</h3>
+                                <p class="stat-description">Årlig plastforurensning i norske havområder</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-top">
+                                <div class="stat-icon">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <div class="stat-numbers">
+                                    <p class="stat-highlight">46,6M tonn</p>
+                                    <span class="trend positive">↓ 9,2% CO₂</span>
+                                </div>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Potensial</h3>
+                                <p class="stat-description">CO₂ utslipp hvert år</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tips-tricks">
+            <h2>Tips & Triks</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-droplet"></i>
+                    <h3>Rengjøring</h3>
+                    <p>Skyll emballasjen før resirkulering</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-box"></i>
+                    <h3>Komprimering</h3>
+                    <p>Brett sammen kartonger og bokser</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-sort"></i>
+                    <h3>Sortering</h3>
+                    <p>Sorter etter materialtype</p>
+                </div>
+            </div>
+        </section>
+</main>
+
+    <footer>
+        <p>&copy; 2025 Sorterings-Hjelperen. All rights reserved.</p>
+    </footer>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+    <script src="scripts.js"></script>
+</body>
+</html>
